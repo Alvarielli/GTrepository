@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+        GNU GENERAL PUBLIC LICENSE (GPL)
+            Version 3, 29 June 2007
+        Copyright (C) Héctor Álvarez Castellano
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!-- Los 8 primeros elementos son comunes a todos, y además calendario y clasificacion
+	(en eleminatorias la clasificacion esta a 0, pero esta)  -->
+	<xs:element name="torneo" type="torneoXSD"/>
+		
+	<!-- Definimos el tipo complejo torneoXSD -->
+	<xs:complexType name="torneoXSD">
+		<xs:sequence>
+			<xs:element name="nombreTorneo" type="xs:string"/>
+			<xs:element name="tipoTorneo" type="xs:integer"/>
+			<xs:element name="deporte" type="xs:integer"/>
+			<xs:element name="jornadas" type="xs:integer"/>
+			<xs:element name="idaVuelta" type="xs:boolean"/>
+			<xs:element name="sets" type="xs:integer"/>
+			<xs:element name="sorteo" type="xs:boolean"/>
+			<xs:element name="tercerCuartoPuesto" type="xs:boolean"/>
+			<xs:element name="sanciones" type="sancionesXSD"/>
+			<!-- calendario y clasificacion usan tipos complejos propios -->
+			<xs:element name="calendario" type="calendarioXSD"/>
+			<xs:element name="clasificacion" type="clasificacionXSD"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Definimos el tipo complejo sancionesXSD -->
+	<xs:complexType name="sancionesXSD">
+		<xs:sequence>
+			<xs:element name="sancionado" type="sancionadoXSD" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>              
+	</xs:complexType>
+
+        <!-- Definimos el tipo complejo sancionadoXSD -->
+	<xs:complexType name="sancionadoXSD">
+           <xs:sequence>
+              <xs:element name="nombreSancionado" type="xs:string" minOccurs="1" maxOccurs="1"/>
+              <xs:element name="sancion" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+           </xs:sequence>
+	</xs:complexType>
+	
+	<!-- Definimos el tipo complejo calendarioXSD -->
+	<xs:complexType name="calendarioXSD">
+		<xs:sequence>
+			<xs:element name="jornada" type="jornadaXSD" minOccurs="1" maxOccurs="unbounded"/><!-- Tipo complejo especial jornadaXSD -->
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Definimos el tipo complejo jornadaXSD -->
+	<xs:complexType name="jornadaXSD">
+		<xs:sequence>
+			<xs:element name="partido" type="partidoXSD" minOccurs="1" maxOccurs="unbounded"/><!-- Tipo complejo especial partidoXSD -->
+		</xs:sequence>
+		<xs:attribute name="numero" type="xs:integer" use="required"/>
+	</xs:complexType>
+	
+	<!-- Definimos el tipo complejo partidoXSD -->
+	<xs:complexType name="partidoXSD">
+		<xs:all>
+		<!-- Los elementos hijos pueden aparecer en cualquier orden y solo una vez <xs:all>
+				Lo bueno es que permite escoger sólo los necesarios gracias a minOccurs = "0" -->
+			<xs:element name="fecha" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="hora" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="local" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="golesL" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="golesV" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="visitante" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="pista" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<!-- Ahora procedemos a ir metiendo los distintos datos que pueden aparecer en cada deporte -->
+			<!-- Primero los Sets -->
+			<xs:element name="set1L" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="set1V" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="set2L" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="set2V" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="set3L" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="set3V" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="set4L" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="set4V" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="set5L" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="set5V" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<!-- Especial de rugby, Hockey Hielo y Ajedrez -->
+			<xs:element name="triesL" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="triesV" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="prorroga" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="blancas" type="xs:double" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="negras" type="xs:double" minOccurs="0" maxOccurs="1"/>
+			<!-- Especial para Eliminatorias -->
+			<xs:element name="ganador" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="desempate" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<!-- Para los partidos de Beisbol -->
+			<xs:element name="RL1" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV1" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL2" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV2" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL3" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV3" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL4" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV4" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL5" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV5" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL6" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV6" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL7" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV7" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL8" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV8" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL9" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV9" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL10" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV10" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL11" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV11" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RL12" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="RV12" type="xs:integer" minOccurs="0" maxOccurs="1"/>				
+		</xs:all>			
+	</xs:complexType>
+	
+	<!-- Definimos el tipo complejo clasificacionXSD -->
+	<xs:complexType name="clasificacionXSD">
+		<xs:sequence>
+			<xs:element name="equipo" type="equipoXSD" minOccurs="3" maxOccurs="unbounded"/><!-- Tipo complejo especial equipoXSD (como mínimo 3 equipos)-->
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Definimos el tipo complejo equipoXSD -->
+	<xs:complexType name="equipoXSD">
+		<xs:all>
+		<!-- Los elementos hijos pueden aparecer en cualquier orden y solo una vez <xs:all> -->
+			<!-- Los tres elementos base de todo equipo -->
+			<xs:element name="numero" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="team" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="posicion" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<!-- Y ahora que escoja los que se ajusten a la clasificación -->
+			<xs:element name="pj" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="pg" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="pe" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="pp" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="pgp" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ppp" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="gf" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="gc" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ptos" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ptosAj" type="xs:double" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="pf" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="pc" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="dif" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="jf" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="jc" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="sf" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="sc" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="sb" type="xs:double" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="tf" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="tc" type="xs:integer" minOccurs="0" maxOccurs="1"/>				
+		</xs:all>			
+	</xs:complexType>
+	
+</xs:schema>
