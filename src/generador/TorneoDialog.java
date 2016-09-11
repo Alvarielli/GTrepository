@@ -62,7 +62,7 @@ public class TorneoDialog extends javax.swing.JDialog {
         initComponents();
         //Código necesario para centrar el diálogo en pantalla
         setLocationRelativeTo(null);
-        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle_en_US").getString("GENERAR UN NUEVO TORNEO"));
+        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle").getString("GENERAR UN NUEVO TORNEO"));
         //Repintamos la lista de equipos
         refrescarLista();
         //Ocultamos los paneles opcionales

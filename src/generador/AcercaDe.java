@@ -42,7 +42,7 @@ public class AcercaDe extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);//Centra el JDialog
-        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle_en_US").getString("ACERCA DE GENERADOR DE TORNEOS"));
+        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle").getString("ACERCA DE GENERADOR DE TORNEOS"));
         LabelEnlace.setCursor(new Cursor(Cursor.HAND_CURSOR));//Ponemos que salga la mano en la etiqueta del enlace
         irEnlace(LabelEnlace, "https://www.gnu.org/licenses/gpl.html");
     }

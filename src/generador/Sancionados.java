@@ -61,7 +61,7 @@ public class Sancionados extends javax.swing.JDialog {
         initComponents();
         //Código necesario para centrar el diálogo en pantalla
         setLocationRelativeTo(null);
-        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle_en_US").getString("AÑADIR SANCIONES A LOS PARTICIPANTES"));
+        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle").getString("AÑADIR SANCIONES A LOS PARTICIPANTES"));
         modeloLista.clear();
         modeloSancLista.clear();
         this.sancionados = sancionados;
@@ -120,6 +120,8 @@ public class Sancionados extends javax.swing.JDialog {
         for (Map.Entry<String, Integer> entry : sancionados.entrySet()) {
            modeloSancLista.addElement(entry.getKey() + " -" + entry.getValue() + " puntos");
         }//end for HashMap
+        this.ListaEquiposMuestra.setModel(modeloLista);
+        this.ListaEquiposSancionados.setModel(modeloSancLista);
      }//End of cargarListas()
          
       /**
@@ -185,7 +187,6 @@ public class Sancionados extends javax.swing.JDialog {
         });
 
         ListaEquiposMuestra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ListaEquiposMuestra.setPreferredSize(new java.awt.Dimension(250, 0));
         ListaEquiposMuestra.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 ListaEquiposMuestraMouseMoved(evt);
@@ -194,7 +195,6 @@ public class Sancionados extends javax.swing.JDialog {
         jScrollPane7.setViewportView(ListaEquiposMuestra);
 
         ListaEquiposSancionados.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ListaEquiposSancionados.setPreferredSize(new java.awt.Dimension(250, 0));
         ListaEquiposSancionados.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 ListaEquiposSancionadosMouseMoved(evt);
@@ -241,14 +241,14 @@ public class Sancionados extends javax.swing.JDialog {
                 .addGap(209, 209, 209))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ButtonAnadirSancionado, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonQuitarSancionado, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextFieldNumeroSancion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(

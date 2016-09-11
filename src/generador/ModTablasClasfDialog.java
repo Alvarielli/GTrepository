@@ -71,7 +71,7 @@ public class ModTablasClasfDialog extends javax.swing.JDialog {
         this.add(scroll);
         //Código necesario para centrar el diálogo en pantalla
         setLocationRelativeTo(null);
-        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle_en_US").getString("MODIFICAR EL TAMAÑO DE LA TABLA"));
+        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle").getString("MODIFICAR EL TAMAÑO DE LA TABLA"));
         //Si la bandera esta activa cargamos la tabla de clasificaciones
         crearBotones(columnasClasf, numc, alturaClasf);
         EtiquetaControlAncho.setText(Integer.toString(ancho_control));

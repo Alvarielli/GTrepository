@@ -58,7 +58,7 @@ public class SeleccionAplazados extends javax.swing.JDialog {
         this.calendario = calendario;
         //Código necesario para centrar el diálogo en pantalla
         setLocationRelativeTo(null);
-        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle_en_US").getString("SELECCIONAR LOS PARTIDOS QUE VAN A FORMAR PARTE DE LA JORNADA DE PARTIDOS APLAZADOS"));
+        setTitle(java.util.ResourceBundle.getBundle("generador/Bundle").getString("SELECCIONAR LOS PARTIDOS QUE VAN A FORMAR PARTE DE LA JORNADA DE PARTIDOS APLAZADOS"));
         partidosAplazados.clear();//Reseteamos los partidos aplazados
         cargarTablaAplazados();
     }
