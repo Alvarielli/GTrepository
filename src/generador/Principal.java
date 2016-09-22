@@ -1695,7 +1695,7 @@ public class Principal extends javax.swing.JFrame {
                         factory.setNamespaceAware(true);  
                         factory.setValidating(true); 
 
-                        try {    
+                        try {
                             //Configurando el Schema de validacion
                             factory.setAttribute(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
                             factory.setAttribute(JAXP_SCHEMA_SOURCE, new File(MY_SCHEMA));

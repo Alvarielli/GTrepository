@@ -181,6 +181,11 @@ public class TorneoDialog extends javax.swing.JDialog {
         LabelNombreTorneo.setText(bundle.getString("TorneoDialog.LabelNombreTorneo.text")); // NOI18N
 
         TextFieldNombreTorneo.setToolTipText(bundle.getString("TorneoDialog.TextFieldNombreTorneo.toolTipText")); // NOI18N
+        TextFieldNombreTorneo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextFieldNombreTorneoActionPerformed(evt);
+            }
+        });
 
         ButtonAnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/plus.png"))); // NOI18N
         ButtonAnadir.setToolTipText(bundle.getString("TorneoDialog.ButtonAnadir.toolTipText")); // NOI18N
@@ -589,6 +594,10 @@ public class TorneoDialog extends javax.swing.JDialog {
         EquiposOpuestos equiposOpuestosDialog = new EquiposOpuestos(this, true, auxEquipoStringLista);
         equiposOpuestosDialog.setVisible(true);
     }//GEN-LAST:event_ButtonEquiposOpuestosActionPerformed
+
+    private void TextFieldNombreTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldNombreTorneoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextFieldNombreTorneoActionPerformed
 
     /**
      * @param args the command line arguments

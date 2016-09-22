@@ -27,11 +27,14 @@ import generador.EquipoLista;
 import generador.Jornada;
 import static generador.Principal.limitarCadena;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import static java.lang.String.valueOf;
 import partidos.Partido;
@@ -650,8 +653,11 @@ public class MetodosBalonmano extends Metodos{
  
         // display nice nice
         xmlOutput.setFormat(Format.getPrettyFormat());
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ruta+"/"+nombreArchivo),"UTF8"));//Lo utiliamos para asignar utf-8 (así funciona)
+        
         //Creamos el archivo xml con FileWriter(el formato se supone que ya viene dado)
-        xmlOutput.output(doc, new FileWriter(ruta+"/"+nombreArchivo)); //"competiciones/torneo.xml"
+        //xmlOutput.output(doc, new FileWriter(ruta+"/"+nombreArchivo)); //"competiciones/torneo.xml"
+        xmlOutput.output(doc, out);//resuelve los problemas de encoding utf-8 que se daban fuera de Netbeans
  
         JOptionPane.showMessageDialog(null, "<html>Archivo <b>" + nombreArchivo + "</b> guardado con éxito</html>", "Guardar Archivo", JOptionPane.INFORMATION_MESSAGE, null);
       } catch (IOException io) {
